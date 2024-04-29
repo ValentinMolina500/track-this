@@ -1,0 +1,22 @@
+.vtable-container {
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 0.25rem;
+  background: white;
+}
+
+.vtable-container .table-cell {
+  padding: 0.5rem 0.5rem;
+}
+
+.vtable-container .vtable-column-container {
+  display: flex;
+}
+
+.vtable-container .vtable-row-container {
+    display: flex;
+  }
+
+.vtable-container .column {
+  font-weight: 600;
+}
