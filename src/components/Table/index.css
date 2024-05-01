@@ -10,12 +10,15 @@
 }
 
 .vtable-container .vtable-column-container {
-  display: flex;
+  display: grid;
 }
 
 .vtable-container .vtable-row-container {
-    display: flex;
-  }
+  display: grid;
+  grid-template-rows: 180px;
+
+  align-items: center;
+}
 
 .vtable-container .column {
   font-weight: 600;

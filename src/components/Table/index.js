@@ -1,14 +1,20 @@
 import "./index.css";
 
-import { useEffect, useRef, useState } from "react";
 const COLUMNS = [
   {
     key: "title",
     title: "Title",
+    width: "1fr"
+  },
+  {
+    key: "image",
+    title: "Image",
+    width: "256px"
   },
   {
     key: "yearReleased",
     title: "Year Released",
+    width: "0.5fr"
   },
 ];
 
@@ -41,40 +47,20 @@ const DATA = [
 
 function Table(props) {
   // const { columns, data } = props;
-  const rowsRef = useRef(null);
-  const [columnWidths, setColumnWidths] = useState([]);
 
-  useEffect(() => {
-    if (!rowsRef.current) return;
+  const getGridStyle = () => {
+    let gridTemplateColumns = [];
 
-    // const tableContainer = rowsRef.current;
-    const rowContainers = rowsRef.current;
-
-    console.log(DATA);
-    // console.log(tableContainer);
-
-    const tempColumnWidths = [];
-
-
-    
-    // Each row
-    for (const rowContainer of rowContainers.children) {
-
-      // maybe subgrid can acheive this?
-      let maxWidth = -1; // Check against the width of the column
-      for (const rowCell of rowContainer.children ) {
-        if (rowCell.offsetWidth > maxWidth) maxWidth = rowCell.offsetWidth;
-      }
-
-      tempColumnWidths.push(maxWidth);
+    for (let i = 0; i < COLUMNS.length; i++) {
+      gridTemplateColumns.push(COLUMNS[i].width ?? "1fr")
     }
 
-    setColumnWidths(tempColumnWidths);
-  }, DATA);
+    return gridTemplateColumns.join(" ");
+  }
   const renderColumns = () => {
     return COLUMNS.map((column, i) => {
       return (
-        <div className="column table-cell" style={{ width: columnWidths[i] }}>
+        <div className="column table-cell">
           {column.title}
         </div>
       );
@@ -83,7 +69,7 @@ function Table(props) {
 
   const renderRowCell = (datum, column, i) => {
     return (
-      <div className="row table-cell" style={{ width: columnWidths[i] }}>
+      <div className="row table-cell">
         {datum[column.key]}
       </div>
     );
@@ -91,7 +77,7 @@ function Table(props) {
   const renderRows = () => {
     return DATA.map((datum) => {
       return (
-        <div className="vtable-row-container">
+        <div className="vtable-row-container" style={{gridTemplateColumns: getGridStyle()}}>
           {COLUMNS.map((column, i) => {
             return renderRowCell(datum, column, i);
           })}
@@ -102,8 +88,8 @@ function Table(props) {
 
   return (
     <div className="vtable-container">
-      <div className="vtable-column-container">{renderColumns()}</div>
-      <div className="vtable-rows-container" ref={rowsRef}>
+      <div className="vtable-column-container"  style={{gridTemplateColumns: getGridStyle()}}>{renderColumns()}</div>
+      <div className="vtable-rows-container">
         {renderRows()}
       </div>
     </div>
