@@ -7,6 +7,8 @@
 
 .vtable-container .table-cell {
   padding: 0.5rem 0.5rem;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .vtable-container .vtable-column-container {
@@ -15,11 +17,16 @@
 
 .vtable-container .vtable-row-container {
   display: grid;
-  grid-template-rows: 180px;
-
+  grid-template-rows: auto;
   align-items: center;
 }
 
 .vtable-container .column {
   font-weight: 600;
+}
+
+.row-cell-img {
+  object-fit: cover;
+  width: 100%;
+  max-height: 100%;
 }

@@ -1,20 +1,24 @@
 import "./index.css";
 
+import Godfather from "../../imgs/godfather.jpg"
 const COLUMNS = [
   {
     key: "title",
     title: "Title",
-    width: "1fr"
+    width: "1fr",
+    type: "text"
   },
   {
     key: "image",
     title: "Image",
-    width: "256px"
+    width: "minmax(0, 200px)",
+    type: "image"
   },
   {
     key: "yearReleased",
     title: "Year Released",
-    width: "0.5fr"
+    width: "0.5fr",
+    type: "text"
   },
 ];
 
@@ -22,6 +26,7 @@ const DATA = [
   {
     title: "Everything Everywhere All at Once",
     yearReleased: 2022,
+    image: Godfather,
   },
   {
     title: "Everything Everywhere All at Once",
@@ -52,7 +57,7 @@ function Table(props) {
     let gridTemplateColumns = [];
 
     for (let i = 0; i < COLUMNS.length; i++) {
-      gridTemplateColumns.push(COLUMNS[i].width ?? "1fr")
+      gridTemplateColumns.push(COLUMNS[i].width ?? "minmax(0, 1fr)")
     }
 
     return gridTemplateColumns.join(" ");
@@ -66,20 +71,29 @@ function Table(props) {
       );
     });
   };
+  
+  const renderRowCellContent = (rowCell, column, i) => {
+    switch (column.type) {
+      case "text": 
+        return rowCell[column.key];
+      case "image":
+        return <img className="row-cell-img" src={rowCell[column.key]} />
+    }
+  }
 
   const renderRowCell = (datum, column, i) => {
     return (
       <div className="row table-cell">
-        {datum[column.key]}
+        {renderRowCellContent(datum, column, i)}
       </div>
     );
   };
   const renderRows = () => {
-    return DATA.map((datum) => {
+    return DATA.map((rowCell) => {
       return (
         <div className="vtable-row-container" style={{gridTemplateColumns: getGridStyle()}}>
           {COLUMNS.map((column, i) => {
-            return renderRowCell(datum, column, i);
+            return renderRowCell(rowCell, column, i);
           })}
         </div>
       );
