@@ -1,0 +1,19 @@
+.tags-wrapper {
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+}
+
+.tags-wrapper .vtag {
+  background: #05204a;
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  border-radius: 0.25rem;
+}
+
+.tags-wrapper .vtag:not(:last-child) {
+  margin-right: 4px;
+}

@@ -1,7 +1,9 @@
 import "./index.css";
-
+import React from "react";
 import Godfather from "../../imgs/godfather.jpg";
 import eeaoo from "../../imgs/eeaao.jpg";
+
+import Tags from "./Tags";
 
 const COLUMNS = [
   {
@@ -19,7 +21,7 @@ const COLUMNS = [
   {
     key: "yearReleased",
     title: "Year Released",
-    width: "1fr",
+    width: "0.5fr",
     type: "text",
   },
   {
@@ -29,11 +31,12 @@ const COLUMNS = [
     type: "text",
   },
   {
-    key: "genres",
+    key: "genre",
     title: "Genre",
-    width: "0.5fr",
+    width: "1fr",
     type: "component",
-  }
+    component: Tags,
+  },
 ];
 
 const DATA = [
@@ -41,14 +44,17 @@ const DATA = [
     title: "The Godfather",
     yearReleased: 2022,
     image: Godfather,
+    altText: "A poster of the movie Godfather.",
     status: "Done",
+    genre: "b",
   },
   {
     title: "Everything Everywhere All At Once",
     yearReleased: 2022,
     image: eeaoo,
-    status: "Done"
-  }
+    altText: "A poster of the movie Everything Everywhere All At Once.",
+    status: "Done",
+  },
 ];
 
 function Table(props) {
@@ -74,7 +80,17 @@ function Table(props) {
       case "text":
         return rowCell[column.key];
       case "image":
-        return <img className="row-cell-img" src={rowCell[column.key]} />;
+        return (
+          <img
+            className="row-cell-img"
+            src={rowCell[column.key]}
+            alt={rowCell.altText}
+          />
+        );
+      case "component":
+        return React.createElement(column.component);
+      default:
+        return "Invalid column type";
     }
   };
 

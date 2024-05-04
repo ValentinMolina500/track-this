@@ -3,7 +3,7 @@
   border: 1px solid lightgray;
   border-radius: 0.25rem;
   background: white;
-  padding: 0 0.5rem;  
+  padding: 0 0.5rem;
   box-sizing: border-box;
 }
 
@@ -18,7 +18,6 @@
 
 .vtable-container .vtable-row-container {
   display: grid;
-  grid-template-rows: auto;
   align-items: center;
 }
 
@@ -33,11 +32,15 @@
   max-height: 100%;
 }
 
-.vtable-column-container, .vtable-row-container:not(:last-child) {
+.vtable-column-container,
+.vtable-row-container:not(:last-child) {
   border-bottom: 1px solid lightgray;
-
 }
 
 .table-cell {
   /* outline: 1px solid lightgray; */
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
