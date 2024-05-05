@@ -4,6 +4,7 @@ import Godfather from "../../imgs/godfather.jpg";
 import eeaoo from "../../imgs/eeaao.jpg";
 
 import Tags from "./Tags";
+import Status, { StatusState } from "./Status";
 
 const COLUMNS = [
   {
@@ -28,7 +29,8 @@ const COLUMNS = [
     key: "status",
     title: "Status",
     width: "0.5fr",
-    type: "text",
+    type: "component",
+    component: Status,
   },
   {
     key: "genre",
@@ -45,7 +47,7 @@ const DATA = [
     yearReleased: 2022,
     image: Godfather,
     altText: "A poster of the movie Godfather.",
-    status: "Done",
+    status: StatusState.NotStarted,
     genre: "b",
   },
   {
@@ -53,7 +55,7 @@ const DATA = [
     yearReleased: 2022,
     image: eeaoo,
     altText: "A poster of the movie Everything Everywhere All At Once.",
-    status: "Done",
+    status: StatusState.Complete
   },
 ];
 
@@ -88,7 +90,7 @@ function Table(props) {
           />
         );
       case "component":
-        return React.createElement(column.component);
+        return React.createElement(column.component, rowCell);
       default:
         return "Invalid column type";
     }

@@ -1,7 +1,10 @@
 .tags-wrapper {
   width: 100%;
   height: 100%;
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 4px;
+  row-gap: 4px;
 }
 
 .tags-wrapper .vtag {
@@ -14,6 +17,3 @@
   border-radius: 0.25rem;
 }
 
-.tags-wrapper .vtag:not(:last-child) {
-  margin-right: 4px;
-}
